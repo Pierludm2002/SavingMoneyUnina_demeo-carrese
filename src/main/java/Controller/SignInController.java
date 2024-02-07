@@ -67,7 +67,8 @@ public class SignInController {
 			else { 
 				try {
 					Statement stmt = conn.createStatement(); 
-					String query = "INSERT INTO utente VALUES('"+name+"','"+surname+"','"+ dataDiNascita +"','"+idUtente+"','"+email+"','"+ psw +"')";
+					String query = "INSERT INTO utente(nome,cognome,data_nascita,id_utente,email,password)"
+							+ " VALUES('"+name+"','"+surname+"','"+ dataDiNascita +"','"+idUtente+"','"+email+"','"+ psw +"')";
 					int numRighe = stmt.executeUpdate(query);
 					if(numRighe == 1) { 
 						System.out.println("Inserimento avvenuto con successo");
