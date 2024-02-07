@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -17,6 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import org.jdatepicker.JDatePicker;
 
+import Controller.SignInController;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class SignInGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,29 +31,13 @@ public class SignInGui extends JFrame {
 	private JTextField textCognome;
 	private JTextField textAnno;
 	private JTextField textEmail;
-	private JTextField textPsw;
+	private JPasswordField textPsw;
 	private JTextField textMese;
 	private JTextField textGiorno;
-
-	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SignInGui frame = new SignInGui();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	//SignInController controller = new SignInController(textEmail,textFieldNome,textCognome,textAnno,
+		//	textMese,	textGiorno, textPsw, btnRegistrati); 
 
 	
-	 * Create the frame.
-	 */
 	public SignInGui() {
 		setTitle("Registrazione");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +46,7 @@ public class SignInGui extends JFrame {
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{145, 90, 45, 15, 45, 15, 75, 50, 145};
+		gbl_contentPane.columnWidths = new int[]{145, 90, 49, 15, 50, 17, 75, 50, 130};
 		gbl_contentPane.rowHeights = new int[]{120, 30, 30, 30, 30, 30, 0, 40, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -146,12 +136,12 @@ public class SignInGui extends JFrame {
 				textMese.setColumns(10);
 				
 				JLabel lblslash_1 = new JLabel("/");
-				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-				gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_1.gridx = 5;
-				gbc_lblNewLabel_1.gridy = 3;
-				contentPane.add(lblslash_1, gbc_lblNewLabel_1);
+				GridBagConstraints gbc_lblslash_1 = new GridBagConstraints();
+				gbc_lblslash_1.anchor = GridBagConstraints.EAST;
+				gbc_lblslash_1.insets = new Insets(0, 0, 5, 5);
+				gbc_lblslash_1.gridx = 5;
+				gbc_lblslash_1.gridy = 3;
+				contentPane.add(lblslash_1, gbc_lblslash_1);
 		
 				textAnno = new JTextField();
 				GridBagConstraints gbc_textAnno = new GridBagConstraints();
@@ -161,6 +151,14 @@ public class SignInGui extends JFrame {
 				gbc_textAnno.gridy = 3;
 				contentPane.add(textAnno, gbc_textAnno);
 				textAnno.setColumns(10);
+		
+		JLabel lbldataFormat = new JLabel("(DD-MM-YYYY)");
+		GridBagConstraints gbc_lbldataFormat = new GridBagConstraints();
+		gbc_lbldataFormat.gridwidth = 2;
+		gbc_lbldataFormat.insets = new Insets(0, 0, 5, 5);
+		gbc_lbldataFormat.gridx = 7;
+		gbc_lbldataFormat.gridy = 3;
+		contentPane.add(lbldataFormat, gbc_lbldataFormat);
 		
 		JLabel lblEmail = new JLabel("Email: ");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
@@ -186,7 +184,7 @@ public class SignInGui extends JFrame {
 		gbc_lblPSW.gridy = 5;
 		contentPane.add(lblPsw, gbc_lblPSW);
 		
-		textPsw = new JTextField();
+		textPsw = new JPasswordField();
 		GridBagConstraints gbc_textPsw = new GridBagConstraints();
 		gbc_textPsw.gridwidth = 6;
 		gbc_textPsw.insets = new Insets(0, 0, 5, 5);
@@ -197,6 +195,13 @@ public class SignInGui extends JFrame {
 		textPsw.setColumns(10);
 		
 		JButton btnRegistrati = new JButton("Registrati");
+		SignInController controller = new SignInController(textEmail,textFieldNome,textCognome,textAnno,
+				textMese,	textGiorno, textPsw, btnRegistrati); 
+		btnRegistrati.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controller.InviaRegistrazione();
+			}
+		});
 		GridBagConstraints gbc_btnRegistrati = new GridBagConstraints();
 		gbc_btnRegistrati.gridwidth = 5;
 		gbc_btnRegistrati.insets = new Insets(0, 0, 5, 5);
