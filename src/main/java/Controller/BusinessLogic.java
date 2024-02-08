@@ -1,12 +1,42 @@
 package Controller;
+//
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import Database.DBconnection;
 
 public class BusinessLogic {
-	int contatoreUtenti = 2; 
+	//
+	Connection conn; 
+	
+	int contatoreUtenti = 0; 
 	int contatoreFamiglia = 0; 
 	int contatoreTransazioni = 0; 
-	
+	//
+	BusinessLogic(){ 
+		try { 
+			conn = DBconnection.getInstance().getConnection(); 
+		}catch(SQLException e) { 
+			System.out.println("Connessione per ottenere numero di utenti fallita!");
+			e.printStackTrace();
+			} 
+	}
 	
 	public String generaId(TipoEntita entita) {
+		
+		try { 
+			Statement stm = conn.createStatement(); 
+			String query = "select count(*) as numUtenti from utente "; 
+			ResultSet rs = stm.executeQuery(query);
+			if(rs.next()) { 
+				contatoreUtenti = rs.getInt("numUtenti"); 
+			}
+		}catch(SQLException e){ 
+			   System.out.println("Errore durante la richiesta : " + e.getMessage());
+			   e.printStackTrace();
+		}
 		switch(entita) { 
 			case User: 
 				contatoreUtenti++; 

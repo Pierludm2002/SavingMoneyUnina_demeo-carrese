@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
+import javax.swing.JTabbedPane;
+import java.awt.Insets;
 
 public class HomePageGui extends JFrame {
 
@@ -26,8 +28,9 @@ public class HomePageGui extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
+		
 		
 		JLabel lblNewLabel = new JLabel("Home Page");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
