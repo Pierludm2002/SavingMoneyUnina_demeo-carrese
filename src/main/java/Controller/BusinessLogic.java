@@ -11,7 +11,6 @@ public class BusinessLogic {
 	//
 	Connection conn; 
 	
-	int contatoreUtenti = 0; 
 	int contatoreFamiglia = 0; 
 	int contatoreTransazioni = 0; 
 	//
@@ -23,9 +22,9 @@ public class BusinessLogic {
 			e.printStackTrace();
 			} 
 	}
-	
-	public String generaId(TipoEntita entita) {
-		
+	public int SetNumUtenti(){
+		int contatoreUtenti = 0; 
+
 		try { 
 			Statement stm = conn.createStatement(); 
 			String query = "select count(*) as numUtenti from utente "; 
@@ -33,14 +32,28 @@ public class BusinessLogic {
 			if(rs.next()) { 
 				contatoreUtenti = rs.getInt("numUtenti"); 
 			}
-		}catch(SQLException e){ 
-			   System.out.println("Errore durante la richiesta : " + e.getMessage());
-			   e.printStackTrace();
+			}catch(SQLException e){ 
+			 	System.out.println("Errore durante la richiesta : " + e.getMessage());
+			 	e.printStackTrace();
+			}/*finally{
+				if(conn!=null){ 
+					try{
+						conn.close(); 	
+					}catch(SQLException e){ 
+						System.out.println("Errore durante la chiusura della connessione col Database:");
+					e.printStackTrace();  
+			}
 		}
+	}*/
+	return contatoreUtenti++; 
+}
+	
+	public String generaId(TipoEntita entita) {
+		
+	
 		switch(entita) { 
 			case User: 
-				contatoreUtenti++; 
-				return generaId("u", contatoreUtenti);
+				return generaId("u", SetNumUtenti());
 			case Famiglia: 
 				contatoreFamiglia++; 
 				return generaId("f", contatoreFamiglia); 

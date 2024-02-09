@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import org.jdatepicker.JDatePicker;
 
@@ -199,7 +200,14 @@ public class SignInGui extends JFrame {
 				textMese,	textGiorno, textPsw, btnRegistrati); 
 		btnRegistrati.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.InviaRegistrazione();
+				if(controller.InviaRegistrazione()) {
+				dispose();
+				LoginGUI logingui = new LoginGUI(); 
+				logingui.setVisible(true);
+				}else { 
+					JOptionPane.showMessageDialog(null,"Invio non riuscito riprova", "Errore", JOptionPane.ERROR_MESSAGE);
+					textPsw.setText(""); 
+				}
 			}
 		});
 		GridBagConstraints gbc_btnRegistrati = new GridBagConstraints();
