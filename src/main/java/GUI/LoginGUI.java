@@ -118,6 +118,13 @@ public class LoginGUI extends JFrame {
 		getContentPane().add(passwordField, gbc_passwordField);
 		
 		btnAccedi = new JButton("Accedi");  
+				 btnAccedi.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                // Codice per aprire l'homepage dopo aver effettuato l'accesso
+	              HomePageGui homePage = new HomePageGui();
+	                homePage.setVisible(true);
+	            }
+	        });
 		
 		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
