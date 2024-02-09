@@ -13,5 +13,8 @@ public class Main{
 		
 		System.out.println("CIAO ");
 	}
-
+	
+	public void closeLoginGui(LoginGUI login){ 
+		login.setVisible(false); 
+	}
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import GUI.HomePageGui;
+import GUI.SignInGui;
 
 import javax.swing.*;
 
@@ -18,8 +19,8 @@ public class LoginController {
 	
 	private JTextField emailField; 
 	private JPasswordField passwordField; 
-	private String Url = "jdbc:postgresql://localhost:5432/postgres";
-	private JButton btnAccedi; 
+	JButton btnAccedi; 
+	 
 	Connection conn; 
 	
 	public LoginController() {}
@@ -34,16 +35,12 @@ public class LoginController {
 		}catch(SQLException e){ 
 			showErrorDialog("Errore durante l'ottenimento della connessione"); 
 			e.printStackTrace();
-		}
-		initialize(); 
+		} 
 	}
 
 	
-	private void initialize() { 
-		btnAccedi.addActionListener(e -> AttemptLogin());
-	}
 	
-	public void AttemptLogin() { 
+	public boolean AttemptLogin() { 
 		String email = emailField.getText(); 
 		String password = new String(passwordField.getPassword()); 
 		
@@ -55,8 +52,8 @@ public class LoginController {
 			
 			HomePageGui homePage = new HomePageGui(); 
 			homePage.setVisible(true); 
-			
-		}
+			return true;
+		}else return false; 
 	}
 
 	private boolean CheckCredentials(String email, String password){
@@ -83,6 +80,13 @@ public class LoginController {
 			e.printStackTrace();
 			return false;
 		}
+		
+	}
+	
+	public void OpenSignInGUI() { 
+		
+		SignInGui signIn = new SignInGui(); 
+		signIn.setVisible(true);
 		
 	}
 	
