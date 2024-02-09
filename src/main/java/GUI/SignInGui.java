@@ -195,6 +195,14 @@ public class SignInGui extends JFrame {
 		textPsw.setColumns(10);
 		
 		JButton btnRegistrati = new JButton("Registrati");
+		 btnRegistrati.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                // Codice per aprire l'homepage dopo aver effettuato la registrazione
+	              HomePageGui homePage = new HomePageGui();
+	                homePage.setVisible(true);
+	            }
+	        });
+		
 		SignInController controller = new SignInController(textEmail,textFieldNome,textCognome,textAnno,
 				textMese,	textGiorno, textPsw, btnRegistrati); 
 		btnRegistrati.addActionListener(new ActionListener() {
