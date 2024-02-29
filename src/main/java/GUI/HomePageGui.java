@@ -32,6 +32,8 @@ public class HomePageGui extends JFrame {
 		setTitle("Homepage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(200,200,650,400); 
+	setLocationRelativeTo(null);
+	
         GridBagLayout gbl_panel = new GridBagLayout();
         gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
         gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 0.0};
