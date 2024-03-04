@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JPasswordField;
 import java.awt.SystemColor;
 import java.awt.GridBagLayout;
@@ -40,28 +41,12 @@ public class LoginGUI extends JFrame {
 	private JPanel panel;
 	private JLabel lblNewLabel;
 
-	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginGUI frame = new LoginGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	
-	 * Create the frame.
-	 */
 	public LoginGUI() {
+		getContentPane().setForeground(new Color(230, 242, 255));
 		setFont(new Font("Verdana", Font.PLAIN, 14));
 		setTitle("LOGIN-SAVINMONEYUNINA");
+		setLocationRelativeTo(null); 
 		
 		getContentPane().setBackground(SystemColor.window);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,6 +73,7 @@ public class LoginGUI extends JFrame {
 		Image imageSmaller = icon.getImage().getScaledInstance(newWidth, 100, Image.SCALE_SMOOTH); 
 		ImageIcon iconSmaller = new ImageIcon(imageSmaller); 
 		JLabel lblLogo = new JLabel(iconSmaller);
+		lblLogo.setBorder(null);
 		panel.add(lblLogo);
 		
 		JLabel lblEmail= new JLabel("Inserire nome utente ( o email) e password. ");

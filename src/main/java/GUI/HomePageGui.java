@@ -18,94 +18,165 @@ import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.JTree;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 
 
 public class HomePageGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private final JLabel label = new JLabel("New label");
+	
 	public HomePageGui() {
 		setForeground(new Color(72, 255, 248));
 		
 		setTitle("Homepage");
+		setLocationRelativeTo(null); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        setBounds(200,200,650,400); 
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0};
-        gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0};
-        gbl_panel.columnWidths = new int[]{0, 121, 110, 100, 104, 86};
-        gbl_panel.rowHeights = new int[]{100, 57, 94, 0};
+        gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 0.0};
+        gbl_panel.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, 0.0};
+        gbl_panel.columnWidths = new int[]{45,45, 150, 100, 150, 45 ,45};
+        gbl_panel.rowHeights = new int[]{50, 50, 60, 60, 40, 90};
         JPanel panel = new JPanel(gbl_panel);
-        ImageIcon icon = new ImageIcon("Images/home.png"); 
+        
+		
+        ImageIcon icon2 = new ImageIcon("Images/home.png"); 
+		int newWidth2 = (int) Math.round(icon2.getIconWidth() * (double) 100/icon2.getIconHeight()); 
+		Image imageSmaller2 = icon2.getImage().getScaledInstance(newWidth2, 100, Image.SCALE_SMOOTH); 
+		ImageIcon iconSmaller2 = new ImageIcon(imageSmaller2); 
+		
+		ImageIcon icon1 = new ImageIcon("Images/User.png"); 
+		
+		JButton btnUser = new JButton(icon1);
+		btnUser.setBorder(null); 
+		btnUser.setBackground(getForeground());
+		btnUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PaginaUtente userPage = new PaginaUtente(); 
+				userPage.setVisible(true);
+			}
+		});
+		
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.gridwidth = 3;
+		gbc_panel_1.gridheight = 2;
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 2;
+		gbc_panel_1.gridy = 0;
+		panel.add(panel_1, gbc_panel_1);
+		
+		
+        ImageIcon icon = new ImageIcon("Images/logo.png"); 
 		int newWidth = (int) Math.round(icon.getIconWidth() * (double) 100/icon.getIconHeight()); 
 		Image imageSmaller = icon.getImage().getScaledInstance(newWidth, 100, Image.SCALE_SMOOTH); 
 		ImageIcon iconSmaller = new ImageIcon(imageSmaller); 
 		JLabel lblLogo = new JLabel(iconSmaller);
-		panel.add(lblLogo);
+		lblLogo.setForeground(new Color(255, 253, 253));
+		lblLogo.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLogo.setBorder(new EmptyBorder(0,0,0,0));
+		GridBagConstraints gbc_lblLogo = new GridBagConstraints();
+		gbc_lblLogo.fill = GridBagConstraints.HORIZONTAL;
+		lblLogo.setBorder(null);
+		panel_1.add(lblLogo, gbc_lblLogo);
 		
+		GridBagConstraints gbc_btnUser = new GridBagConstraints();
+		gbc_btnUser.fill = GridBagConstraints.BOTH;
+		gbc_btnUser.insets = new Insets(0, 0, 5, 0);
+		gbc_btnUser.gridx = 6;
+		gbc_btnUser.gridy = 0;
+		panel.add(btnUser, gbc_btnUser);
+		
+		JButton famigliaButton = new JButton("Gestione famiglia");
+		famigliaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GestioneFamigliaGUI pagFamiglia = new GestioneFamigliaGUI(); 
+				pagFamiglia.setVisible(true);
+			}
+		});
+		famigliaButton.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 2;
+		panel.add(famigliaButton, gbc_btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Portafoglio");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PortafoglioGUI pagWallet = new PortafoglioGUI(); 
+				pagWallet.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.fill = GridBagConstraints.HORIZONTAL;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 4;
+		gbc_button.gridy = 2;
+		panel.add(btnNewButton_1, gbc_button);
+		JLabel lblHomeimg = new JLabel(iconSmaller2);
+		lblHomeimg.setBackground(getForeground());
+		lblHomeimg.setBorder(null); 
+		panel.add(lblHomeimg);
+        
+        
+        GridBagConstraints gbc_image = new GridBagConstraints();
+        gbc_image.insets = new Insets(0, 0, 5, 5);
+        gbc_image.gridx = 3; 
+        gbc_image.gridy = 3; 
+        panel.add(lblHomeimg, gbc_image); 
+        getContentPane().add(panel);
+
+        
+        getContentPane().add(panel);
+                
+                        
+                       
+        JButton depositoButton = new JButton("Cronologia transazioni\n");
+        depositoButton.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+                        
+          depositoButton.addActionListener(new ActionListener() {
+                                    @Override
+              public void actionPerformed(ActionEvent e) {
+                       JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel);
+                                frame.dispose();
+                                CronoTransGUI paginadeposito = new CronoTransGUI();
+                                        paginadeposito.setVisible(true);
+                                    }
+                                });
+                                        
     
         
-        JButton prelievoButton = new JButton("Prelievo");
+        JButton newOpButton = new JButton("Nuova operazione");
+        newOpButton.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         
-        prelievoButton.addActionListener(new ActionListener() {
+        newOpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Chiudi la finestra corrente
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel);
                 frame.dispose();
                 // Apri la pagina per il deposito
-                Prelievo paginaprelievo = new Prelievo();
-                paginaprelievo.setVisible(true);
+                NewOpGUI newop = new NewOpGUI();
+                newop.setVisible(true);
+                
             }
         });
-
-
-        
-        
-        GridBagConstraints p = new GridBagConstraints(); 
-        p.insets = new Insets(0, 0, 5, 5);
-        p.gridx = 1;
-        p.gridy = 0;
-        panel.add(prelievoButton, p);
-        
-        
-        GridBagConstraints gbc_image = new GridBagConstraints();
-        gbc_image.insets = new Insets(0, 0, 5, 5);
-        gbc_image.gridx = 3; 
-        gbc_image.gridy = 1; 
-        panel.add(lblLogo, gbc_image); 
-        
-        getContentPane().add(panel);
-
-        
-        getContentPane().add(panel);
-        
-                
                
-                JButton depositoButton = new JButton("Deposito");
-                
-                        depositoButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                // Chiudi la finestra corrente
-                                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel);
-                                frame.dispose();
-                                
-                                // Apri la pagina per il deposito
-                                Deposito paginadeposito = new Deposito();
-                                paginadeposito.setVisible(true);
-                            }
-                        });
-                        
-                                
-                                GridBagConstraints d = new GridBagConstraints();
-                                d.insets = new Insets(0, 0, 5, 5);
-                                d.gridx = 1;
-                                d.gridy = 1;
-                                panel.add(depositoButton, d);
-                                
-                                
+        GridBagConstraints p = new GridBagConstraints();
+        p.insets = new Insets(0, 0, 5, 5);
+        p.gridx = 2;
+        p.gridy = 4;
+        panel.add(newOpButton, p);                         
+        GridBagConstraints d = new GridBagConstraints();
+        d.insets = new Insets(0, 0, 5, 5);
+        d.gridx = 4;
+        d.gridy = 4;
+        panel.add(depositoButton, d);                        
         setSize(416, 331);
         pack();
         setLocationRelativeTo(null);
