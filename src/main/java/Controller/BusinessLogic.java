@@ -35,18 +35,25 @@ public class BusinessLogic {
 			}catch(SQLException e){ 
 			 	System.out.println("Errore durante la richiesta : " + e.getMessage());
 			 	e.printStackTrace();
-			}/*finally{
-				if(conn!=null){ 
-					try{
-						conn.close(); 	
-					}catch(SQLException e){ 
-						System.out.println("Errore durante la chiusura della connessione col Database:");
-					e.printStackTrace();  
 			}
+		return contatoreUtenti++; 
+	}	
+		
+	public int SetNumTransazioni() { 
+		try { 
+			Statement stm = conn.createStatement(); 
+			String query = "SELECT count(*) as numTransazione FROM transazione"; 
+			ResultSet rs = stm.executeQuery(query); 
+			if(rs.next()) { 
+				contatoreTransazioni = rs.getInt("numTransazione"); 
+			}
+		}catch(SQLException e) {
+		 	System.out.println("Errore durante la richiesta : " + e.getMessage());
+			e.printStackTrace();
 		}
-	}*/
-	return contatoreUtenti++; 
-}
+		return contatoreTransazioni; 
+	}
+
 	
 	public String generaId(TipoEntita entita) {
 		
@@ -59,7 +66,7 @@ public class BusinessLogic {
 				return generaId("f", contatoreFamiglia); 
 			case Transazione: 
 				contatoreTransazioni++; 
-				return generaId("t", contatoreTransazioni); 
+				return generaId("t", SetNumTransazioni()); 
 			default: 
 				return null; 
 			
@@ -71,5 +78,6 @@ public class BusinessLogic {
 		String numeroFormattato = String.format("%04d",numero); 
 		return prefisso + numeroFormattato; 
 	}
+	
 	
 }

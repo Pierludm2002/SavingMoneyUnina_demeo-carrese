@@ -48,6 +48,7 @@ public class SignInController {
 		String dataDiNascita = anno + "-" + mese + "-" + giorno;
 		BusinessLogic bl = new BusinessLogic();
 		String idUtente = bl.generaId(TipoEntita.User);
+		
 		boolean inviato = false ; 
 
 			if(email.isEmpty()) {

@@ -20,6 +20,7 @@ public class LoginController {
 	private JTextField emailField; 
 	private JPasswordField passwordField; 
 	JButton btnAccedi; 
+	String idUtente; 
 	 
 	Connection conn; 
 	
@@ -37,7 +38,7 @@ public class LoginController {
 			e.printStackTrace();
 		} 
 	}
-
+	
 	
 	
 	public boolean AttemptLogin() { 
@@ -65,7 +66,7 @@ public class LoginController {
 			Statement stmt = conn.createStatement(); 
 			ResultSet rs ; 
 			System.out.println("credenziali query "+ email + " psw: " + password);
-			String query = "SELECT email, password FROM utente WHERE email ='" + email + "'AND password = '" + password+"'"; 
+			String query = "SELECT email, password, id_utente FROM utente WHERE email ='" + email + "'AND password = '" + password+"'"; 
 			
 			rs = stmt.executeQuery(query); 
 			
@@ -73,7 +74,10 @@ public class LoginController {
 				System.out.println("ERROR , no user has been found");
 				return false; 
 			}
-			else return true; 
+			else { 
+				idUtente = rs.getString("id_utente"); 
+				return true; 
+			}
 			
 		}catch(SQLException e) { 
 			showErrorDialog("ERRORE durante la comunicazione col db" + e.getMessage()); 
@@ -88,8 +92,31 @@ public class LoginController {
 		SignInGui signIn = new SignInGui(); 
 		signIn.setVisible(true);
 		
+		
 	}
 	
+	public String getIdUtente() { 
+		try {
+			String email = emailField.getText(); 
+			String query = "SELECT id_utente from utente where email = ?"; 
+			PreparedStatement pstm = conn.prepareStatement(query); 
+			pstm.setString(1,email); 
+			ResultSet rs = pstm.executeQuery(); 
+			
+			
+			if(rs.next()) { 
+				String idUtente = rs.getString("id_utente"); 
+				return idUtente; 
+			}else { 
+				return null; 
+			}
+			
+		}catch(SQLException e) { 
+			e.printStackTrace();
+		}
+		return null; 
+		
+	}
 
 	private void showErrorDialog(String message) {
 	    JOptionPane.showMessageDialog(null, message, "Errore", JOptionPane.ERROR_MESSAGE);
