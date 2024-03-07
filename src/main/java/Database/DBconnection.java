@@ -8,7 +8,7 @@ public class DBconnection {
 	
     private static DBconnection instance;
     static Connection conn = null; 
-    static String Url = "jdbc:postgresql://localhost:5432/postgres";
+    static String Url = "jdbc:postgresql://localhost:1234/postgres";
 	static String user = "postgres"; 
 	static String psw = "Saving"; 
 	
