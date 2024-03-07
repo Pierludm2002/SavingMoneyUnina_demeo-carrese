@@ -70,9 +70,7 @@ public class CronoTransGUI extends JFrame {
 		gbcCardView.gridy = 1; 
 		
 		
-		
-		
-		
+		//
 		
 	}
 
