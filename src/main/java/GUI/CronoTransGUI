@@ -1,0 +1,136 @@
+package GUI;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import java.awt.List;
+import java.awt.Font;
+
+public class CronoTransGUI extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	public CronoTransGUI() {
+
+		setTitle("Cronologia delle Transazioni\\n");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(200, 200, 650, 400);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+		setContentPane(contentPane);
+
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		contentPane.setLayout(gbl_contentPane);
+
+		ImageIcon backBtnIcon = new ImageIcon("Images/Go Back.png");
+		JButton backBtn = new JButton(backBtnIcon);
+		backBtn.setBorder(null);
+		backBtn.setPreferredSize(new Dimension(10, 15));
+		backBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				HomePageGui homegui = new HomePageGui();
+				homegui.setVisible(true);
+			}
+		});
+		GridBagConstraints gbc_backBtn = new GridBagConstraints();
+		gbc_backBtn.fill = GridBagConstraints.BOTH;
+		gbc_backBtn.insets = new Insets(0, 0, 5, 5);
+		gbc_backBtn.gridx = 1;
+		gbc_backBtn.gridy = 0;
+		contentPane.add(backBtn, gbc_backBtn);
+
+		GridBagConstraints gbcCardView = new GridBagConstraints();
+		gbcCardView.anchor = GridBagConstraints.WEST;
+		gbcCardView.gridwidth = 5;
+		gbcCardView.insets = new Insets(0, 0, 5, 5);
+		gbcCardView.gridx = 6;
+		gbcCardView.gridy = 1;
+
+		GridBagConstraints n = new GridBagConstraints();
+		n.insets = new Insets(0, 0, 5, 5);
+
+		JLabel numeroCartaLabel = new JLabel("Numero di Carta:");
+		n.gridx = 1;
+		n.gridy = 1;
+		contentPane.add(numeroCartaLabel, n);
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.insets = new Insets(0, 0, 5, 5);
+		c.gridy = 1;
+		JTextField numeroCartaField = new JTextField(20);
+		c.gridx = 2;
+		contentPane.add(numeroCartaField, c);
+
+		GridBagConstraints cat = new GridBagConstraints();
+		cat.insets = new Insets(0, 0, 5, 5);
+		JLabel categoriaLabel = new JLabel("Categoria:");
+		cat.gridx = 1;
+		cat.gridy = 2;
+		contentPane.add(categoriaLabel, cat);
+
+		GridBagConstraints f = new GridBagConstraints();
+		f.insets = new Insets(0, 0, 5, 5);
+		f.gridy = 2;
+		JTextField categoriaField = new JTextField(20);
+		f.gridx = 2;
+		contentPane.add(categoriaField, f);
+
+		GridBagConstraints p = new GridBagConstraints();
+		p.insets = new Insets(0, 0, 5, 5);
+		JLabel periodoLabel = new JLabel("Periodo:");
+		p.gridx = 1;
+		p.gridy = 3;
+		contentPane.add(periodoLabel, p);
+
+		GridBagConstraints pf = new GridBagConstraints();
+		pf.insets = new Insets(0, 0, 5, 5);
+		pf.gridy = 3;
+		JTextField periodoField = new JTextField(20);
+		pf.gridx = 2;
+		contentPane.add(periodoField, pf);
+
+		GridBagConstraints butt = new GridBagConstraints();
+		butt.insets = new Insets(0, 0, 5, 5);
+		JButton visualizzaButton = new JButton("Visualizza");
+		visualizzaButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Component panel = null;
+				// Chiudi la finestra corrente
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel);
+				frame.dispose();
+				// Apri la pagina per il deposito
+				Archiviotrans arch = new Archiviotrans();
+				arch.setVisible(true);
+
+			}
+		});
+
+		butt.gridx = 1;
+		butt.gridy = 5;
+		butt.gridwidth = 2;
+
+		contentPane.add(visualizzaButton, butt);
+
+	}
+}
